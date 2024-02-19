@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+</head>
+<body>
+<center>
+    <div class="search-container">
+        <form class="search-form" th:action="@{/agencyMain/search}" th:method="GET" style="display: flex; justify-content: center; padding: 20px;">
+            <input class="search-input" type="search" name="id" placeholder="agencyId" style="width: 200px; height: 35px; padding: 5px; border-radius: 5px; border: 1px solid #ccc;" required>
+            <button class="search-button" type="submit" style="margin-left: 10px; padding: 5px 10px; border-radius: 5px; border: none; background-color: #007BFF; color: white;">Search</button>
+        </form>
+    </div>
+<div>
+    <div class="card-container">
+        <div class="card" style="width: 18rem;" th:each="agency:${getAllAgencies}">
+            <img th:src="${agency.getImage()}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 th:text="${agency.getName()}" class="card-title">Card title</h5>
+                <p th:text="${agency.getCountry()}" class="card-text"></p>
+                <p th:text="${agency.getEmail()}" class="card-text"></p>
+                <p th:text="${agency.getPhoneNumber()}" class="card-text"></p>
+                <form th:method="GET" class="btn btn-primary" th:action="@{/houseMain/{agencyId}/getAgency(agencyId=${agency.getId()})}">
+                    <input type="submit" th:value="HOME">
+                </form>
+                <form th:method="DELETE" th:action="@{/agencyMain/{agencyId}/delete(agencyId=${agency.getId()})}">
+                    <input type="submit" th:value="Delete">
+                </form>
+<!--                <form th:method="Get" th:action="@{/agencyMain/{agencyId}/get(agencyId=${agency.getId()})}">-->
+<!--                    <input type="submit" th:value="Get">-->
+<!--                </form>-->
+                <form th:method="GET" th:action="@{/agencyMain/update/{agencyId}(agencyId=${agency.getId()})}">
+                    <input type="submit" th:value="Update">
+                </form>
+                <form th:method="GET" th:action="@{/customerMain/{agencyId}/getAgencyCustomers(agencyId=${agency.getId()})}">
+                    <input type="submit" th:value="Customers">
+                </form>
+<!--                <form th:method="Delete" th:action="@{/houseMain/{agencyId}/deleteAgency(agencyId=${agency.getId()})}">-->
+<!--                    <input type="hidden" name="agencyId" th:value="${agency.getId()}" />-->
+<!--                    <input type="submit" class="btn btn-danger" value="Delete All Houses of the Agency">-->
+<!--                </form>-->
+                <td><a class="btn btn-primary" th:href="@{'/agencyMain/' + ${agency.id} + '/notAssignedEmployees'}">Details</a></td>
+            </div>
+        </div>
+    </div>
+</div>
+<a class="btn btn-primary" href="/agencyMain/create" role="button">Add Agency</a>
+<a class="btn btn-primary" href="/houseMain" role="button">All home</a>
+<a class="btn btn-primary" href="/Main" role="button">Main</a>
+</center>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</html>

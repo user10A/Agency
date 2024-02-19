@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <style>
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        .card {
+            margin: 20px;
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .btn-primary {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <section class="card-container">
+        <div class="card" style="width: 18rem;" th:each="booking:${getAllBooking}">
+            <div class="card-body">
+                <img th:src="${booking.customer.image}" alt="Customer Image" class="card-img-top">
+                <h5 th:text="${booking.customer.name}" class="card-title">Name</h5>
+                <p th:text="${booking.customer.surname}" class="card-text">Surname</p>
+                <p th:text="${booking.house.houseType}" class="card-text">House type</p>
+                <p th:text="${booking.house.isBooked()}" class="card-text">Is booked</p>
+                <img th:src="${booking.house.image}" alt="House Image" class="card-img-bottom">
+            </div>
+        </div>
+    </section>
+</div>
+<form action="bookingMain/create" method="GET">
+    <button class="btn btn-primary" type="submit">Add Booking</button>
+</form>
+<div>
+    <a th:href="@{/bookingMain}" class="btn btn-secondary">Back to Home Main</a>
+    <a th:href="@{/Main}" class="btn btn-primary">Back to Main</a>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<style>
+  .card-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .card{
+    margin: 70px;
+  }
+
+</style>
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<center>
+  <div class="search-container">
+    <form class="search-form" th:action="@{/agencyMain/search}" th:method="GET" style="display: flex; justify-content: center; padding: 20px;">
+      <input class="search-input" type="search" name="id" placeholder="agencyId" style="width: 200px; height: 35px; padding: 5px; border-radius: 5px; border: 1px solid #ccc;" required>
+      <button class="search-button" type="submit" style="margin-left: 10px; padding: 5px 10px; border-radius: 5px; border: none; background-color: #007BFF; color: white;">Search</button>
+    </form>
+  </div>
+  <div class="card-container">
+    <div class="card" style="width: 40rem;">
+      <form th:method="POST" th:action="@{save}" th:object="${newAgency}">
+        <div class="mb-3">
+          <label for="name" class="form-label">Agency name</label>
+          <input th:field ="*{name}" type="text" class="form-control" id="name" >
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Image</label>
+          <input th:field="*{image}" type="text" class="form-control" id="image">
+        </div>
+        <div>
+        <select th:field="*{country}" class="form-select" id="country">
+          <option th:each="country : ${T(peaksoft.enamus.Country).values()}" th:value="${country}" th:text="${country.name()}"></option>
+        </select>
+        </div>
+        <div class="mb-3">
+          <label  for="email" class="form-label">Email</label>
+          <input th:field="*{email}" type="text" class="form-label" id="email">
+        </div>
+        <div class="mb-3">
+          <label for="phoneNumber" class="form-label" >phoneNumber</label>
+          <input th:field="*{phoneNumber}" type="text" class="form-label" id="phoneNumber">
+        </div>
+        <button type="submit">save</button>
+      </form>
+    </div>
+  </div>
+  <a class="btn btn-primary" href="/agencyMain/create" role="button">Add Agency</a>
+  <a class="btn btn-primary" href="/houseMain" role="button">All home</a>
+  <a class="btn btn-primary" href="/Main" role="button">Main</a>
+</center>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</html>

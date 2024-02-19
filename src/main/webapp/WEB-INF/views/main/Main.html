@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
+    <style>
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Высота равная высоте окна просмотра */
+        }
+
+        .custom-button {
+            width: 200px;
+            height: 100px;
+            font-size: 20px;
+            margin: 10px;
+            transition: transform .2s; /* Анимация при наведении */
+        }
+
+        .custom-button:hover {
+            transform: scale(1.1); /* Увеличение размера при наведении */
+        }
+    </style>
+</head>
+
+<body>
+<div class="btn-container">
+    <button type="button" class="btn btn-primary custom-button" onclick="location.href='/agencyMain'">
+        <a href="/agencyMain" class="text-white text-decoration-none">Agency</a>
+    </button>
+    <button type="button" class="btn btn-success custom-button" onclick="location.href='/houseMain'">
+        <a href="/houseMain" class="text-white text-decoration-none">House</a>
+    </button>
+    <button type="button" class="btn btn-info custom-button" onclick="location.href='/customerMain'">
+        <a href="/customerMain" class="text-white text-decoration-none">Customer</a>
+    </button>
+    <button type="button" class="btn btn-info custom-button" onclick="location.href='/bookingMain'">
+        <a href="/customerMain" class="text-white text-decoration-none">Booking</a>
+    </button>
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+</html>

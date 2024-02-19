@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<style>
+  .card-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .card{
+    margin: 70px;
+  }
+
+</style>
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<center>
+  <div class="search-container">
+    <form class="search-form" th:action="@{/houseMain/search}" th:method="GET" style="display: flex; justify-content: center; padding: 20px;">
+      <input class="search-input" type="search" name="id" placeholder="houseId" style="width: 200px; height: 35px; padding: 5px; border-radius: 5px; border: 1px solid #ccc;" required>
+      <button class="search-button" type="submit" style="margin-left: 10px; padding: 5px 10px; border-radius: 5px; border: none; background-color: #007BFF; color: white;">Search</button>
+    </form>
+  </div>
+  <div class="card-container">
+    <div class="card" style="width: 40rem;">
+      <form th:method="POST" th:action="@{save}" th:object="${newHouse}">
+        <div class="mb-3">
+          <label for="agencyId" class="form-label">Agency ID</label>
+          <input type="number" class="form-control" id="agencyId" name="agencyId">
+        </div>
+        <div>
+        <select th:field="*{houseType}" class="form-select" id="House Type">
+          <option th:each="houseType : ${T(peaksoft.enamus.HouseType).values()}" th:value="${houseType}" th:text="${houseType.name()}"></option>
+        </select>
+      </div>
+        <div class="mb-3">
+          <label for="room" class="form-label">House room</label>
+          <input th:field ="*{room}" type="number" class="form-control" id="room" >
+        </div>
+        <div class="mb-3">
+          <label for="address" class="form-label">address</label>
+          <input th:field="*{address}" type="text" class="form-control" id="address">
+        </div>
+
+        <div class="mb-3">
+          <label  for="images" class="form-label">images</label>
+          <input th:field="*{image}" type="text" class="form-label" id="images">
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label" >price</label>
+          <input th:field="*{price}" type="number" class="form-label" id="price">
+        </div>
+        <div>
+          <select th:field="*{country}" class="form-select" id="country">
+            <option th:each="country : ${T(peaksoft.enamus.Country).values()}" th:value="${country}" th:text="${country.name()}"></option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label" >description</label>
+          <input th:field="*{description}" type="text" class="form-label" id="description">
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
+      <center>
+        <div>
+          <a th:href="@{/houseMain}" class="btn btn-secondary">Back to Home Main</a>
+          <a th:href="@{/Main}" class="btn btn-primary">Back to Main</a>
+        </div>
+      </center>
+    </div>
+  </div>
+</center>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</html>
